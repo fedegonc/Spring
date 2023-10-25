@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xlms:th="http://thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:xlms="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+
+<h1>editar Livro</h1>
+<form method="post">
+	Titulo<input type="text" name="titulo" th:value="${titulo}"/><br/>
+	Autor<input type="text" name="autor" th:value="${autor}"/><br/>
+	Genero<input type="text" name="genero" th:value="${genero}"/><br/>
+	Preço<input type="text" name="preco" th:value="${preco}"/><br/>
+	Resumo<textarea name="resumo" th:text="${resumo}"></textarea><br/>
+	<button type="submit">Enviar</button>
+</form>
+</body>
+</html>
