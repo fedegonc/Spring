@@ -12,20 +12,20 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="livros")
 public class Livros {
-	
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotBlank
 	private String titulo;
-	
+
 	@NotBlank
 	private String autor;
-	
+
 	@NotNull
 	private Double preco;
-	
+
 	@NotBlank
 	private String genero;
 
@@ -90,5 +90,5 @@ public class Livros {
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
 	}
-	
+
 }

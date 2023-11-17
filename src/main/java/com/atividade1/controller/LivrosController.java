@@ -1,60 +1,62 @@
 package com.atividade1.controller;
 
+import com.atividade1.model.Livros;
+import com.atividade1.repository.LivrosRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.validation.Errors;
+import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.atividade1.model.Livros;
-import com.atividade1.repository.LivrosRepository;
-
 @Controller
 public class LivrosController {
-	@Autowired 
+	@Autowired
 	LivrosRepository LivrosRepository;
-	
+
 	@RequestMapping(value="/novolivro", method=RequestMethod.GET)
 	public String novolivro() {
 		return "livros/novolivro";
 	}
-	
+
 	@RequestMapping(value="/novolivro", method=RequestMethod.POST)
 	public String novolivroCadastrado(@Valid Livros livros,
-                                      BindingResult result, RedirectAttributes msg, @RequestParam("file") MultipartFile imagem) throws IOException {
-			if(result.hasErrors()) {
-				msg.addFlashAttribute("erro", 
-						"Erro ao cadastrar. Por favor, preencha todos os campos");
-				return "redirect:/novolivro";
+									  BindingResult result, RedirectAttributes msg,
+									  @RequestParam("file") MultipartFile imagem) {
+		if(result.hasErrors()) {
+			msg.addFlashAttribute("erro",
+					"Erro ao cadastrar. Por favor, preencha todos os campos");
+			return "redirect:/novolivro";
+		}
+		try {
+			if(!imagem.isEmpty()) {
+				byte[] bytes = imagem.getBytes();
+				Path caminho = Paths.get("./src/main/resources/static/img/"+imagem.getOriginalFilename());
+				Files.write(caminho, bytes);
+				livros.setImagem(imagem.getOriginalFilename());
 			}
-            try {
-                if(!imagem.isEmpty())
-            }catch (IOException e)
-            {
-                System.out.println("error de imagen");
-                byte[] bytes = imagem.getBytes();
-                Path caminho = Paths.get(imagem.getOriginalFilename());
-                livros.setImagem(imagem.getOriginalFilename());
-            }
-			LivrosRepository.save(livros);
-			msg.addFlashAttribute("sucesso", 
-					"Livro cadastrado.");
-			return "redirect:/inicio";	
+		}
+		catch (IOException e) {
+			System.out.println("error de imagen");
+		}
+
+		LivrosRepository.save(livros);
+		msg.addFlashAttribute("sucesso",
+				"Livro cadastrado.");
+		return "redirect:/inicio";
 	}
-	
+
 	@RequestMapping(value="/listarlivros", method=RequestMethod.GET)
 	public ModelAndView getUsuarios() {
 		ModelAndView mv = new ModelAndView("/livros/listarlivros");
@@ -65,9 +67,9 @@ public class LivrosController {
 
 	@RequestMapping(value="/editar/{id}", method=RequestMethod.GET)
 	public ModelAndView editar(@PathVariable("id") int id){
-	ModelAndView mv = new ModelAndView("livros/editarlivro");
-	Optional<Livros> livro = LivrosRepository.findById(id);
-	mv.addObject("titulo", livro.get().getTitulo());
+		ModelAndView mv = new ModelAndView("livros/editarlivro");
+		Optional<Livros> livro = LivrosRepository.findById(id);
+		mv.addObject("titulo", livro.get().getTitulo());
 
 		mv.addObject("autor", livro.get().getAutor());
 
@@ -77,7 +79,7 @@ public class LivrosController {
 		mv.addObject("genero", livro.get().getGenero());
 		mv.addObject("id", livro.get().getId());
 
-	return mv;
+		return mv;
 	}
 
 	@RequestMapping(value="/editar/{id}", method=RequestMethod.POST)
@@ -92,10 +94,28 @@ public class LivrosController {
 		return "redirect:/listarlivros";
 	}
 
-	@RequestMapping(value="/editar/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/deletar/{id}", method=RequestMethod.GET)
 	public String excluir(@PathVariable("id") int id){
 		LivrosRepository.deleteById(id);
 		return "redirect:/listarlivros";
 	}
+	@RequestMapping(value="/imagem/{imagem}", method=RequestMethod.GET)
+	@ResponseBody
+	public byte[] getImagens(@PathVariable("imagem") String imagem) throws IOException {
+		File caminho = new File("./src/main/resources/static/img/"+imagem);
+		if(imagem != null || imagem.trim().length() > 0)
+		{
+			return Files.readAllBytes(caminho.toPath());
+		}
+		return null;
+	}
+
+	@GetMapping("/styled-page")
+	public String getStyledPage(Model model) {
+		model.addAttribute("name", "Baeldung Reader");
+		return "cssandjs/styledPage";
+	}
+
+
 
 }

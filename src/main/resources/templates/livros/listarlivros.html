@@ -1,29 +1,39 @@
-<!DOCTYPE html>
-<html xlms:th="http://thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:xlms="http://www.w3.org/1999/xhtml">
-	<head></head>
-	<body>
-		<h1>Livros</h1>
-		<table>
-			<thead>
-				<th>ID</th>
-				<th>Titulo</th>
-				<th>Autor</th>
-				<th>Preço</th>
-				<th>Resumo</th>
-				<th>Genero</th>
-			</thead>
-			<tbody>
-				<tr th:each="livro : ${livros}">
-					<td th:text = ${livro.id}></td>
-					<td th:text = ${livro.titulo}></td>
-					<td th:text = ${livro.autor}></td>
-					<td th:text = ${livro.preco}></td>
-					<td th:text = ${livro.resumo}></td>
-					<td th:text = ${livro.genero}></td>
-					<td><a th:href="@{/editar/{id}(id=${livro.id})}">Editar</a></td>
 
-				</tr>
-			</tbody>
-		</table>
-	</body>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Tu Aplicación Web</title>
+	<link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
+
+</head>
+<body>
+<h1>Livros</h1>
+<table>
+	<thead>
+	<th>ID</th>
+	<th>Titulo</th>
+	<th>Autor</th>
+	<th>Preço</th>
+	<th>Resumo</th>
+	<th>Genero</th>
+	</thead>
+	<tbody>
+	<tr th:each="livro : ${livros}">
+		<td th:text = ${livro.id}></td>
+		<td th:text = ${livro.titulo}></td>
+		<td th:text = ${livro.autor}></td>
+		<td th:text = ${livro.preco}></td>
+		<td><img th:src="@{/img/{imagem}(imagem=${livro.imagem})}" /></td>
+		<td th:text = ${livro.resumo}></td>
+		<td th:text = ${livro.genero}></td>
+		<td><a th:href="@{/editar/{id}(id=${livro.id})}">Editar</a></td>
+
+	</tr>
+	</tbody>
+</table>
+
+</body>
 </html>
