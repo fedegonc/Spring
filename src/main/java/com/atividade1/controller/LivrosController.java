@@ -58,7 +58,7 @@ public class LivrosController {
 	}
 
 	@RequestMapping(value="/listarlivros", method=RequestMethod.GET)
-	public ModelAndView getUsuarios() {
+	public ModelAndView getAlimentos() {
 		ModelAndView mv = new ModelAndView("/livros/listarlivros");
 		List<Livros> livros = LivrosRepository.findAll();
 		mv.addObject("livros", livros);
