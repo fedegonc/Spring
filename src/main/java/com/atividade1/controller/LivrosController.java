@@ -25,9 +25,9 @@ public class LivrosController {
 	@Autowired
 	LivrosRepository LivrosRepository;
 
-	@RequestMapping(value = "/inicio", method = RequestMethod.GET)
+	@RequestMapping(value = "/iniciolivros", method = RequestMethod.GET)
 	public String inicioLivros() {
-		return "livros/inicio";
+		return "livros/iniciolivros";
 	}
 
 	@RequestMapping(value = "/novolivro", method = RequestMethod.GET)
@@ -59,7 +59,7 @@ public class LivrosController {
 		msg.addFlashAttribute("sucesso",
 				"Livro cadastrado.");
 
-		return "redirect:/inicio";
+		return "redirect:/listarlivros";
 	}
 
 	@RequestMapping(value = "/listarlivros", method = RequestMethod.GET)
