@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head></head>
+<head>
+
+    <title>Nova Postagem</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/estilos.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
+</head>
 <body>
 
 <h1>Nova Postagem</h1>
-<form method="post" enctype="multipart/form-data" th:action="@{/postagem/novo}">
+<form method="post" enctype="multipart/form-data">
     Título<input type="text" name="titulo"/><br/>
-    Autor<input type="text" name="autor"/><br/>
     Conteúdo<textarea name="conteudo"></textarea><br/>
-    Imagem<input type="file" name="imagem"/><br/>
+    Imagem<input type="file" name="file"/><br/>
     <button type="submit">Enviar</button>
 </form>
+
+<a th:href="@{/novapostagem}">Agregar Nuevo Postagem</a><br/>
+<a th:href="@{/listarpostagems}">Listar Postagems</a><br/>
+<a th:href="@{/iniciopostagems}">Inicio Postagems</a>
 
 </body>
 </html>

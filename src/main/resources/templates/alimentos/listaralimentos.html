@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Alimentos</title>
+    <link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
+</head>
 <body>
 
 <h1>Listar Alimentos</h1>
@@ -20,12 +25,19 @@
         <td th:text="${alimento.id}"></td>
         <td th:text="${alimento.nome}"></td>
         <td th:text="${alimento.preco}"></td>
+
         <td><img th:src="@{/alimento/imagem/{imagem}(imagem=${alimento.imagem})}" /></td>
-        <td><a th:href="@{/alimento/editar/{id}(id=${alimento.id})}">Editar</a></td>
-        <td><a th:href="@{/alimento/excluir/{id}(id=${alimento.id})}">Excluir</a></td>
+
+        <td> <a th:href="@{/editaralimento/{id}(id=${alimento.id})}">Editar</a></td>
+
+        <td><a th:href="@{/alimento/deletar/{id}(id=${alimento.id})}">Excluir</a></td>
     </tr>
     </tbody>
 </table>
+
+<a th:href="@{/novoalimento}">Agregar Nuevo Alimento</a><br/>
+<a th:href="@{/listaralimentos}">Listar Alimentos</a><br/>
+<a th:href="@{/inicioalimentos}">Inicio Alimentos</a>
 
 </body>
 </html>

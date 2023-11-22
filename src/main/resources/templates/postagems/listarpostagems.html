@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<title>Listar Postagems</title>
+<link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
+<body>
+
+<h1>Listar Postagens</h1>
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Título</th>
+    <th>Autor</th>
+    <th>Conteúdo</th>
+    <th>Imagem</th>
+    <th>Editar</th>
+    <th>Excluir</th>
+    </thead>
+    <tbody>
+    <tr th:each="postagem : ${postagems}">
+        <td th:text="${postagem.id}"></td>
+        <td th:text="${postagem.autor}"></td>
+        <td th:text="${postagem.conteudo}"></td>
+
+        <td><img th:src="@{/img/{imagem}(imagem=${postagem.imagem})}" /></td>
+
+        <td><a th:href="@{/editar/{id}(id=${postagem.id})}">Editar</a></td>
+        <td><a th:href="@{/deletar/{id}(id=${postagem.id})}">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/novapostagem}">Agregar Nuevo Post</a><br/>
+<a th:href="@{/listarpostagems}">Listar Posts</a><br/>
+<a th:href="@{/iniciopostagems}">Inicio Posts</a><br/>
+<a th:href="@{/home}">Home</a>
+
+</body>
+</html>

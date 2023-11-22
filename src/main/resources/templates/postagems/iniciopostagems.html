@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>Inicio Postagems</title>
     <link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
@@ -13,9 +10,10 @@
 <h1>Bienvenido a la Página de Inicio de Postagems</h1>
 
 
-<a th:href="@{/novopostagems}">Agregar Nuevo Post</a><br/>
+<a th:href="@{/novapostagem}">Agregar Nuevo Post</a><br/>
 <a th:href="@{/listarpostagems}">Listar Posts</a><br/>
 <a th:href="@{/iniciopostagems}">Inicio Posts</a><br/>
 <a th:href="@{/home}">Home</a>
+
 </body>
 </html>

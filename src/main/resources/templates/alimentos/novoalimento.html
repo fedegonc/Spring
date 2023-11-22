@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-<head></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Alimento</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/estilos.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
+
+</head>
 <body>
 
 <h1>Novo Alimento</h1>
@@ -12,5 +18,10 @@
     Descrição<textarea name="descricao"></textarea><br/>
     <button type="submit">Enviar</button>
 </form>
+
+<a th:href="@{/novoalimento}">Agregar Nuevo Alimento</a><br/>
+<a th:href="@{/listaralimentos}">Listar Alimentos</a><br/>
+<a th:href="@{/inicioalimentos}">Inicio Alimentos</a>
+
 </body>
 </html>

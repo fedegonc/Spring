@@ -1,25 +1,27 @@
 package com.atividade1.model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "alimentos")
-public class Alimento {
+@Table(name = "postagens")
+public class Postagems {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank
-    private String nome;
+    private String titulo;
 
-    @NotNull
-    private Double preco;
+    @NotBlank
+    @Lob
+    private String conteudo;
 
     private String imagem;
 
@@ -31,20 +33,20 @@ public class Alimento {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
-	public Double getPreco() {
-		return preco;
+	public String getConteudo() {
+		return conteudo;
 	}
 
-	public void setPreco(Double preco) {
-		this.preco = preco;
+	public void setConteudo(String conteudo) {
+		this.conteudo = conteudo;
 	}
 
 	public String getImagem() {
@@ -55,5 +57,5 @@ public class Alimento {
 		this.imagem = imagem;
 	}
 
-  
+    
 }

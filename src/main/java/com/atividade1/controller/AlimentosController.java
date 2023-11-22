@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.atividade1.model.Alimento;
+import com.atividade1.model.Alimentos;
 import com.atividade1.repository.AlimentosRepository;
 
 import javax.validation.Valid;
@@ -36,9 +36,11 @@ public class AlimentosController {
         return "alimentos/novoalimento";
     }
 
+
     @RequestMapping(value = "/novoalimento", method = RequestMethod.POST)
-    public String novoAlimentoCadastrado(@Valid Alimento alimento,
-                                         BindingResult result, RedirectAttributes msg, @RequestParam("file") MultipartFile imagem) throws IOException {
+    public String novoAlimentoCadastrado(@Valid Alimentos alimento,
+                                         BindingResult result, RedirectAttributes msg,
+                                         @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
             msg.addFlashAttribute("erro",
                     "Erro ao cadastrar alimento. Por favor, preencha todos os campos");
@@ -58,21 +60,21 @@ public class AlimentosController {
         alimentosRepository.save(alimento);
         msg.addFlashAttribute("sucesso",
                 "Alimento cadastrado.");
-        return "redirect:/inicioalimentos";
+        return "redirect:/listaralimentos";
     }
 
     @RequestMapping(value = "/listaralimentos", method = RequestMethod.GET)
     public ModelAndView getAlimentos() {
-        ModelAndView mv = new ModelAndView("alimentos/listaralimento");
-        List<Alimento> alimentos = alimentosRepository.findAll();
+        ModelAndView mv = new ModelAndView("alimentos/listaralimentos");
+        List<Alimentos> alimentos = alimentosRepository.findAll();
         mv.addObject("alimentos", alimentos);
         return mv;
     }
 
-    @RequestMapping(value = "/alimento/editaralimento/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/editaralimento/{id}", method = RequestMethod.GET)
     public ModelAndView editarAlimento(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("alimentos/editaralimento");
-        Optional<Alimento> alimento = alimentosRepository.findById(id);
+        Optional<Alimentos> alimento = alimentosRepository.findById(id);
         mv.addObject("nome", alimento.get().getNome());
         mv.addObject("preco", alimento.get().getPreco());
         mv.addObject("id", alimento.get().getId());
@@ -80,18 +82,18 @@ public class AlimentosController {
     }
 
     @RequestMapping(value = "/alimentos/editaralimento/{id}", method = RequestMethod.POST)
-    public String editarAlimentoBanco(Alimento alimento, RedirectAttributes msg) {
-        Alimento alimentoExistente = alimentosRepository.findById(alimento.getId()).orElse(null);
+    public String editarAlimentoBanco(Alimentos alimento, RedirectAttributes msg) {
+        Alimentos alimentoExistente = alimentosRepository.findById(alimento.getId()).orElse(null);
         alimentoExistente.setNome(alimento.getNome());
         alimentoExistente.setPreco(alimento.getPreco());
         alimentosRepository.save(alimentoExistente);
-        return "redirect:/alimento/listaralimento";
+        return "redirect:/alimentos/listaralimentos";
     }
 
-    @RequestMapping(value = "/alimento/excluiralimento/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/alimentos/excluiralimento/{id}", method = RequestMethod.GET)
     public String excluirAlimento(@PathVariable("id") int id) {
         alimentosRepository.deleteById(id);
-        return "redirect:/alimento/listaralimento";
+        return "redirect:/alimentos/listaralimentos";
     }
 
     @RequestMapping(value = "/alimento/imagem/{imagem}", method = RequestMethod.GET)

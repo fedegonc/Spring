@@ -35,6 +35,8 @@ public class LivrosController {
 		return "livros/novolivro";
 	}
 
+
+
 	@RequestMapping(value = "/novolivro", method = RequestMethod.POST)
 	public String novolivroCadastrado(@Valid Livros livros,
 									  BindingResult result, RedirectAttributes msg,

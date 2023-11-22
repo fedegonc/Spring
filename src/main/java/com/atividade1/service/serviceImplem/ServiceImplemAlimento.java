@@ -2,7 +2,7 @@ package com.atividade1.service.serviceImplem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.atividade1.model.Alimento;
+import com.atividade1.model.Alimentos;
 import com.atividade1.repository.AlimentosRepository;
 import com.atividade1.service.ServiceAlimento;
 
@@ -15,17 +15,17 @@ public class ServiceImplemAlimento implements ServiceAlimento {
     private AlimentosRepository alimentoRepository;
 
     @Override
-    public List<Alimento> findAll() {
+    public List<Alimentos> findAll() {
         return alimentoRepository.findAll();
     }
 
     @Override
-    public Alimento findById(int id) {
+    public Alimentos findById(int id) {
         return alimentoRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Alimento save(Alimento alimento) {
+    public Alimentos save(Alimentos alimento) {
         return alimentoRepository.save(alimento);
     }
 

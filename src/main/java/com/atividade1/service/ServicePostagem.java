@@ -2,14 +2,14 @@ package com.atividade1.service;
 
 import java.util.List;
 
-import com.atividade1.model.Postagem;
+import com.atividade1.model.Postagems;
 
 public interface ServicePostagem {
 
-    List<Postagem> findAll();
+    List<Postagems> findAll();
 
-    Postagem findById(int id);
+    Postagems findById(int id);
 
-    Postagem save(Postagem postagem);
+    Postagems save(Postagems postagem);
 }
 

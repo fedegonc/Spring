@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.atividade1.model.Postagem;
+import com.atividade1.model.Postagems;
 import com.atividade1.repository.PostagemsRepository;
 
 import javax.validation.Valid;
@@ -26,54 +25,59 @@ import java.util.Optional;
 public class PostagemsController {
 
     @Autowired
-    private PostagemsRepository postagemRepository;
+    private PostagemsRepository PostagemRepository;
 
     @RequestMapping(value = "/iniciopostagems", method = RequestMethod.GET)
     public String inicioPostagems() {
         return "postagems/iniciopostagems";
     }
+
     @RequestMapping(value = "/novapostagem", method = RequestMethod.GET)
     public String novaPostagem() {
-        return "postagem/novo";
+        return "postagems/novapostagem";
     }
 
+
+
+
     @RequestMapping(value = "/novapostagem", method = RequestMethod.POST)
-    public String novaPostagemCadastrada(@Valid Postagem postagem,
-                                         BindingResult result, RedirectAttributes msg, @RequestParam("imagem") MultipartFile imagem) throws IOException {
+    public String novaPostagemCadastrada(@Valid Postagems postagems,
+                                         BindingResult result, RedirectAttributes msg,
+                                         @RequestParam("file") MultipartFile imagem) {
         if (result.hasErrors()) {
             msg.addFlashAttribute("erro",
                     "Erro ao cadastrar postagem. Por favor, preencha todos os campos");
-            return "redirect:/postagem/novo";
+            return "redirect:/novapostagem";
         }
         try {
             if (!imagem.isEmpty()) {
                 byte[] bytes = imagem.getBytes();
                 Path caminho = Paths.get("./src/main/resources/static/img/" + imagem.getOriginalFilename());
                 Files.write(caminho, bytes);
-                postagem.setImagem(imagem.getOriginalFilename());
+                postagems.setImagem(imagem.getOriginalFilename());
             }
         } catch (IOException e) {
             System.out.println("Erro ao salvar imagem");
         }
 
-        postagemRepository.save(postagem);
+        PostagemRepository.save(postagems);
         msg.addFlashAttribute("sucesso",
                 "Postagem cadastrada.");
-        return "redirect:/inicio";
+        return "redirect:/listarpostagems";
     }
 
     @RequestMapping(value = "/listarpostagems", method = RequestMethod.GET)
-    public ModelAndView getPostagens() {
-        ModelAndView mv = new ModelAndView("/postagem/listarpostagem");
-        List<Postagem> postagens = postagemRepository.findAll();
-        mv.addObject("postagems", postagens);
+    public ModelAndView getPostagems() {
+        ModelAndView mv = new ModelAndView("postagems/listarpostagems");
+        List<Postagems> postagems = PostagemRepository.findAll();
+        mv.addObject("postagems", postagems);
         return mv;
     }
 
     @RequestMapping(value = "/editarpostagem/{id}", method = RequestMethod.GET)
     public ModelAndView editarPostagem(@PathVariable("id") int id) {
-        ModelAndView mv = new ModelAndView("postagem/editar");
-        Optional<Postagem> postagem = postagemRepository.findById(id);
+        ModelAndView mv = new ModelAndView("postagems/editarpostagem");
+        Optional<Postagems> postagem = PostagemRepository.findById(id);
         mv.addObject("titulo", postagem.get().getTitulo());
         mv.addObject("conteudo", postagem.get().getConteudo());
         mv.addObject("id", postagem.get().getId());
@@ -81,26 +85,25 @@ public class PostagemsController {
     }
 
     @RequestMapping(value = "/editarpostagem/{id}", method = RequestMethod.POST)
-    public String editarPostagemBanco(Postagem postagem, RedirectAttributes msg) {
-        Postagem postagemExistente = postagemRepository.findById(postagem.getId()).orElse(null);
+    public String editarPostagemBanco(Postagems postagem, RedirectAttributes msg) {
+        Postagems postagemExistente = PostagemRepository.findById(postagem.getId()).orElse(null);
         postagemExistente.setTitulo(postagem.getTitulo());
         postagemExistente.setConteudo(postagem.getConteudo());
-        postagemRepository.save(postagemExistente);
-        return "redirect:/postagem/listar";
+        PostagemRepository.save(postagemExistente);
+        return "redirect:/postagems/listarpostagem";
     }
 
     @RequestMapping(value = "/deletarpostagem/{id}", method = RequestMethod.GET)
     public String excluirPostagem(@PathVariable("id") int id) {
-        postagemRepository.deleteById(id);
-        return "redirect:/postagem/listar";
+        PostagemRepository.deleteById(id);
+        return "redirect:/postagems/listarpostagem";
     }
 
-    @RequestMapping(value = "/imagempostagem/{imagem}", method = RequestMethod.GET)
+    @RequestMapping(value = "/postagem/imagem/{imagem}", method = RequestMethod.GET)
     @ResponseBody
     public byte[] getImagensPostagem(@PathVariable("imagem") String imagem) throws IOException {
         File caminho = new File("./src/main/resources/static/img/" + imagem);
-        String imagem2 = imagem;
-		if (imagem != null || imagem2.trim().length() > 0) {
+        if (imagem != null && caminho.exists()) {
             return Files.readAllBytes(caminho.toPath());
         }
         return null;

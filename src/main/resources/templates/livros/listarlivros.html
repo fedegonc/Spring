@@ -31,8 +31,8 @@
 		<td th:text="${livro.genero}"></td>
 		<td>
 			<a th:href="@{/editar/{id}(id=${livro.id})}">Editar</a>
-			<!-- Agregar el botón de excluir -->
-			<a th:href="@{/deletar/{id}(id=${livro.id})}" onclick="return confirm('¿Estás seguro de que quieres eliminar este libro?')">Excluir</a>
+
+			<a th:href="@{/deletar/{id}(id=${livro.id})}">Excluir</a>
 		</td>
 	</tr>
 	</tbody>

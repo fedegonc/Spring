@@ -2,13 +2,13 @@ package com.atividade1.service;
 
 import java.util.List;
 
-import com.atividade1.model.Alimento;
+import com.atividade1.model.Alimentos;
 
 public interface ServiceAlimento {
 
-    List<Alimento> findAll();
+    List<Alimentos> findAll();
 
-    Alimento findById(int id);
+    Alimentos findById(int id);
    
-	Alimento save(Alimento alimento);
+	Alimentos save(Alimentos alimento);
 }
