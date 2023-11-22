@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+
+<h1>Editar Postagem</h1>
+<form method="post" enctype="multipart/form-data" th:action="@{/postagem/editar/{id}(id=${postagem.id})}">
+    Título<input type="text" name="titulo" th:value="${postagem.titulo}"/><br/>
+    Autor<input type="text" name="autor" th:value="${postagem.autor}"/><br/>
+    Conteúdo<textarea name="conteudo" th:text="${postagem.conteudo}"></textarea><br/>
+    Imagem<input type="file" name="imagem"/><br/>
+    <button type="submit">Salvar Alterações</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+
+<h1>Editar Alimento</h1>
+<form method="post" enctype="multipart/form-data">
+    Nome<input type="text" name="nome" th:value="${nome}"/><br/>
+    Preço<input type="text" name="preco" th:value="${preco}"/><br/>
+    Imagem<input type="file" name="imagem"/><br/>
+    <button type="submit">Salvar Alterações</button>
+</form>
+
+</body>
+</html>

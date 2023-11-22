@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+
+<h1>Nova Postagem</h1>
+<form method="post" enctype="multipart/form-data" th:action="@{/postagem/novo}">
+    Título<input type="text" name="titulo"/><br/>
+    Autor<input type="text" name="autor"/><br/>
+    Conteúdo<textarea name="conteudo"></textarea><br/>
+    Imagem<input type="file" name="imagem"/><br/>
+    <button type="submit">Enviar</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+
+<h1>Listar Alimentos</h1>
+<table>
+    <thead>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Tipo</th>
+    <th>Preço</th>
+    <th>Descrição</th>
+    <th>Imagem</th>
+    <th>Editar</th>
+    <th>Excluir</th>
+    </thead>
+    <tbody>
+    <tr th:each="alimento : ${alimentos}">
+        <td th:text="${alimento.id}"></td>
+        <td th:text="${alimento.nome}"></td>
+        <td th:text="${alimento.preco}"></td>
+        <td><img th:src="@{/alimento/imagem/{imagem}(imagem=${alimento.imagem})}" /></td>
+        <td><a th:href="@{/alimento/editar/{id}(id=${alimento.id})}">Editar</a></td>
+        <td><a th:href="@{/alimento/excluir/{id}(id=${alimento.id})}">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
