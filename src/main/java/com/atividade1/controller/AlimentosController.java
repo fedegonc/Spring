@@ -26,6 +26,11 @@ public class AlimentosController {
     @Autowired
     AlimentosRepository alimentosRepository;
 
+    @RequestMapping(value = "/inicioalimentos", method = RequestMethod.GET)
+    public String inicioAlimentos() {
+        return "alimentos/inicioalimentos";
+    }
+
     @RequestMapping(value = "/novoalimento", method = RequestMethod.GET)
     public String novoAlimento() {
         return "alimentos/novoalimento";
@@ -53,10 +58,10 @@ public class AlimentosController {
         alimentosRepository.save(alimento);
         msg.addFlashAttribute("sucesso",
                 "Alimento cadastrado.");
-        return "redirect:/inicio";
+        return "redirect:/inicioalimentos";
     }
 
-    @RequestMapping(value = "/listaralimento", method = RequestMethod.GET)
+    @RequestMapping(value = "/listaralimentos", method = RequestMethod.GET)
     public ModelAndView getAlimentos() {
         ModelAndView mv = new ModelAndView("alimentos/listaralimento");
         List<Alimento> alimentos = alimentosRepository.findAll();
@@ -64,7 +69,7 @@ public class AlimentosController {
         return mv;
     }
 
-    @RequestMapping(value = "/alimento/editar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/alimento/editaralimento/{id}", method = RequestMethod.GET)
     public ModelAndView editarAlimento(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("alimentos/editaralimento");
         Optional<Alimento> alimento = alimentosRepository.findById(id);
@@ -74,7 +79,7 @@ public class AlimentosController {
         return mv;
     }
 
-    @RequestMapping(value = "/alimento/editar/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/alimentos/editaralimento/{id}", method = RequestMethod.POST)
     public String editarAlimentoBanco(Alimento alimento, RedirectAttributes msg) {
         Alimento alimentoExistente = alimentosRepository.findById(alimento.getId()).orElse(null);
         alimentoExistente.setNome(alimento.getNome());
@@ -83,7 +88,7 @@ public class AlimentosController {
         return "redirect:/alimento/listaralimento";
     }
 
-    @RequestMapping(value = "/alimento/excluir/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/alimento/excluiralimento/{id}", method = RequestMethod.GET)
     public String excluirAlimento(@PathVariable("id") int id) {
         alimentosRepository.deleteById(id);
         return "redirect:/alimento/listaralimento";

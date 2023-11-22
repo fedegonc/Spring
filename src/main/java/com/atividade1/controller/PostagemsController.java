@@ -23,12 +23,15 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/postagem")
 public class PostagemsController {
 
     @Autowired
     private PostagemsRepository postagemRepository;
 
+    @RequestMapping(value = "/iniciopostagems", method = RequestMethod.GET)
+    public String inicioPostagems() {
+        return "postagems/iniciopostagems";
+    }
     @RequestMapping(value = "/novapostagem", method = RequestMethod.GET)
     public String novaPostagem() {
         return "postagem/novo";
@@ -59,15 +62,15 @@ public class PostagemsController {
         return "redirect:/inicio";
     }
 
-    @RequestMapping(value = "/listar", method = RequestMethod.GET)
+    @RequestMapping(value = "/listarpostagems", method = RequestMethod.GET)
     public ModelAndView getPostagens() {
-        ModelAndView mv = new ModelAndView("/postagem/listar");
+        ModelAndView mv = new ModelAndView("/postagem/listarpostagem");
         List<Postagem> postagens = postagemRepository.findAll();
-        mv.addObject("postagens", postagens);
+        mv.addObject("postagems", postagens);
         return mv;
     }
 
-    @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/editarpostagem/{id}", method = RequestMethod.GET)
     public ModelAndView editarPostagem(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("postagem/editar");
         Optional<Postagem> postagem = postagemRepository.findById(id);
@@ -77,7 +80,7 @@ public class PostagemsController {
         return mv;
     }
 
-    @RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/editarpostagem/{id}", method = RequestMethod.POST)
     public String editarPostagemBanco(Postagem postagem, RedirectAttributes msg) {
         Postagem postagemExistente = postagemRepository.findById(postagem.getId()).orElse(null);
         postagemExistente.setTitulo(postagem.getTitulo());
@@ -86,13 +89,13 @@ public class PostagemsController {
         return "redirect:/postagem/listar";
     }
 
-    @RequestMapping(value = "/deletar/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deletarpostagem/{id}", method = RequestMethod.GET)
     public String excluirPostagem(@PathVariable("id") int id) {
         postagemRepository.deleteById(id);
         return "redirect:/postagem/listar";
     }
 
-    @RequestMapping(value = "/imagem/{imagem}", method = RequestMethod.GET)
+    @RequestMapping(value = "/imagempostagem/{imagem}", method = RequestMethod.GET)
     @ResponseBody
     public byte[] getImagensPostagem(@PathVariable("imagem") String imagem) throws IOException {
         File caminho = new File("./src/main/resources/static/img/" + imagem);
