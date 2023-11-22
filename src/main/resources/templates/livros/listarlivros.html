@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Tu Aplicación Web</title>
+	<title>Listar Livros</title>
 	<link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
 </head>
@@ -37,6 +37,11 @@
 	</tr>
 	</tbody>
 </table>
+
+<a th:href="@{/novolivro}">Agregar Nuevo Libro</a>
+<a th:href="@{/listarlivros}">Listar Libros</a>
+<a th:href="@{/inicio}">inicio</a>
+
 </body>
 
 </html>

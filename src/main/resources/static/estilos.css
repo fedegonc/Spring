@@ -1,59 +1,62 @@
 /* Estilos generales */
 body {
     font-family: 'Baloo 2', sans-serif;
-    max-height: 800 vh; /* Establece la altura máxima al 100% de la altura de la ventana */
-    margin: 0; /* Elimina los márgenes predeterminados del body */
-    padding: 20px; /* Agrega un relleno para separar el contenido del borde de la ventana */
-    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    background-color: #f8f9fa; /* Gris claro para el fondo */
+    color: #343a40; /* Negro para el texto */
+    margin: 0;
+    padding: 20px;
+    overflow-y: auto;
+    text-align: center; /* Centra el contenido */
 }
 
 /* Encabezado */
 h1 {
-    text-align: center; /* Centra el título */
-    color: #333; /* Color del texto */
-    background-color: #007BFF; /* Color de fondo del encabezado */
-    padding: 20px; /* Espaciado alrededor del título */
+    color: #007BFF; /* Azul para el encabezado */
+    padding: 20px;
 }
 
-/* Tabla de libros */
-table {
-    width: 100%; /* Ancho de la tabla al 100% del contenedor */
-    border-collapse: collapse; /* Borra los bordes entre las celdas */
-    background-color: #fff; /* Color de fondo de la tabla */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave alrededor de la tabla */
+/* Formulario */
+form {
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario en la página */
+    background-color: #fff; /* Fondo blanco para el formulario */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de las celdas de encabezado */
-th {
-    background-color: #333; /* Color de fondo del encabezado de la columna */
-    color: #fff; /* Color del texto en el encabezado de la columna */
-    font-weight: bold; /* Texto en negrita en el encabezado */
-    padding: 10px; /* Espaciado en las celdas del encabezado */
-    text-align: left; /* Alineación del texto a la izquierda */
+/* Estilo de las cajas de entrada */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
 
-/* Estilo de las celdas de datos */
-td {
-    padding: 10px; /* Espaciado en las celdas de datos */
+/* Estilo del botón */
+button {
+    background-color: #007BFF; /* Azul para el botón */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
 }
 
-/* Estilo para las imágenes en la tabla */
-table img {
-    max-width: 100px; /* Establece el ancho máximo de las imágenes */
-    height: auto; /* Mantiene la relación de aspecto original */
-    display: block; /* Evita problemas de alineación */
-    margin: 0 auto; /* Centra las imágenes horizontalmente en las celdas de la tabla */
-}
-
-/* Estilo para los enlaces "Editar" */
+/* Estilo para los enlaces */
 a {
-    text-decoration: none; /* Quita la decoración de subrayado */
-    color: #007BFF; /* Color del enlace */
-    font-weight: bold; /* Texto en negrita en los enlaces */
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
 }
 
-/* Estilo para las imágenes fuera de la tabla */
-img {
-    display: block; /* Evita problemas de alineación */
-    margin: 0 auto; /* Centra las imágenes horizontalmente en la página */
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    form {
+        width: 80%; /* Ajusta el ancho del formulario para pantallas más pequeñas */
+    }
+
+    /* Establece un tamaño máximo para las imágenes en la tabla */
+    table img {
+        max-width: 100px;
+        height: auto;
+    }
 }
