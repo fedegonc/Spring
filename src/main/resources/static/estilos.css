@@ -15,30 +15,36 @@ h1 {
     padding: 20px;
 }
 
-/* Formulario */
-form {
-    max-width: 600px; /* Ancho máximo del formulario */
-    margin: 0 auto; /* Centra el formulario en la página */
-    background-color: #fff; /* Fondo blanco para el formulario */
-    padding: 20px;
+/* Tabla de libros */
+table {
+    width: 80%; /* Ancho del 80% del contenedor */
+    margin: 0 auto; /* Centra la tabla en la página */
+    border-collapse: collapse;
+    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo de las cajas de entrada */
-input, textarea {
-    width: 100%;
+/* Estilo de las celdas de encabezado */
+th {
+    background-color: #007BFF; /* Azul para el encabezado de la columna */
+    color: #fff; /* Color del texto en el encabezado de la columna */
+    font-weight: bold;
     padding: 10px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+    text-align: left;
 }
 
-/* Estilo del botón */
-button {
-    background-color: #007BFF; /* Azul para el botón */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
+/* Estilo de las celdas de datos */
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilo para las imágenes en la tabla */
+table img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* Estilo para los enlaces */
@@ -46,17 +52,6 @@ a {
     text-decoration: none;
     color: #007BFF;
     font-weight: bold;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    form {
-        width: 80%; /* Ajusta el ancho del formulario para pantallas más pequeñas */
-    }
-
-    /* Establece un tamaño máximo para las imágenes en la tabla */
-    table img {
-        max-width: 100px;
-        height: auto;
-    }
+    margin: 10px;
+    display: inline-block; /* Hace que los enlaces se muestren en línea */
 }

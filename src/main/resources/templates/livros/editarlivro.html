@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xlms:th="http://thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:xlms="http://www.w3.org/1999/xhtml">
 <head>
-	<link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/estilos.css}" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
 </head>
 <body>
@@ -22,8 +22,8 @@
 	<button type="submit">Borrar</button>
 </form>
 
-<a th:href="@{/novolivro}">Agregar Nuevo Libro</a>
-<a th:href="@{/listarlivros}">Listar Libros</a>
+<a th:href="@{/novolivro}">Agregar Nuevo Libro</a><br/>
+<a th:href="@{/listarlivros}">Listar Libros</a><br/>
 <a th:href="@{/inicio}">Inicio</a>
 
 </body>

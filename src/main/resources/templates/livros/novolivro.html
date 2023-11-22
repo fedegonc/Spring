@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Listar Livros</title>
-	<link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/estilos.css}" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
 
 </head>
@@ -22,8 +22,8 @@
 	<button type="submit">Enviar</button>
 </form>
 
-<a th:href="@{/novolivro}">Agregar Nuevo Libro</a>
-<a th:href="@{/listarlivros}">Listar Libros</a>
+<a th:href="@{/novolivro}">Agregar Nuevo Libro</a><br/>
+<a th:href="@{/listarlivros}">Listar Libros</a><br/>
 <a th:href="@{/inicio}">Inicio</a>
 </body>
 </html>
