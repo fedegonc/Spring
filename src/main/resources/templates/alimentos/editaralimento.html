@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Editar Alimentos</title>
-    <link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/estilos.css}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
 </head>
 <body>
@@ -10,8 +10,9 @@
 <h1>Editar Alimento</h1>
 <form method="post" enctype="multipart/form-data">
     Nome<input type="text" name="nome" th:value="${nome}"/><br/>
+    Tipo<input type="text" name="tipo" th:value="${tipo}"/><br/>
     Preço<input type="text" name="preco" th:value="${preco}"/><br/>
-    Imagem<input type="file" name="imagem"/><br/>
+    Imagem<input type="file" name="file"/><br/>
     <button type="submit">Salvar Alterações</button>
 </form>
 

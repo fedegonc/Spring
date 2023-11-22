@@ -81,7 +81,7 @@ public class AlimentosController {
         return mv;
     }
 
-    @RequestMapping(value = "/alimentos/editaralimento/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/editaralimento/{id}", method = RequestMethod.POST)
     public String editarAlimentoBanco(Alimentos alimento, RedirectAttributes msg) {
         Alimentos alimentoExistente = alimentosRepository.findById(alimento.getId()).orElse(null);
         alimentoExistente.setNome(alimento.getNome());

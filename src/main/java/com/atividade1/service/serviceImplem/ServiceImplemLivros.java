@@ -33,4 +33,9 @@ public class ServiceImplemLivros implements ServiceLivros{
 		return LivrosRepository.save(livros);
 	}
 
+	@Override
+	public List<Livros> findLivrosByPreco(double preco) {
+		return LivrosRepository.findLivrosByPreco(preco);
+	}
+
 }

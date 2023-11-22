@@ -9,4 +9,6 @@ public interface ServiceLivros {
 	List<Livros> findAll();
 	Livros findById(int id);
 	Livros save(Livros livros);
+
+	List<Livros> findLivrosByPreco(double preco);
 }
