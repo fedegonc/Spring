@@ -4,12 +4,12 @@
 <body>
 
 <h1>Editar Livro</h1>
-<form method="post" th:action="@{/deletar/{id}(id=${livro.id})}">
+<form method="post" th:action="@{/editar/{id}(id=${livro.id})}">
 	Título<input type="text" name="titulo" th:value="${livro.titulo}"/><br/>
 	Autor<input type="text" name="autor" th:value="${livro.autor}"/><br/>
 	Género<input type="text" name="genero" th:value="${livro.genero}"/><br/>
-	Preço<input type="text" name="preco" th:value="${livro.preco}"/><br/>
-	Resumo<textarea name="resumo" th:text="${livro.resumo}"></textarea><br/>
+	Precio<input type="text" name="preco" th:value="${livro.preco}"/><br/>
+	Resumen<textarea name="resumo" th:text="${livro.resumo}"></textarea><br/>
 	<button type="submit">Guardar Cambios</button>
 </form>
 

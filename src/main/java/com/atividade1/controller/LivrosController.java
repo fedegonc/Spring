@@ -54,11 +54,12 @@ public class LivrosController {
 		LivrosRepository.save(livros);
 		msg.addFlashAttribute("sucesso",
 				"Livro cadastrado.");
+
 		return "redirect:/inicio";
 	}
 
 	@RequestMapping(value="/listarlivros", method=RequestMethod.GET)
-	public ModelAndView getAlimentos() {
+	public ModelAndView getLivro() {
 		ModelAndView mv = new ModelAndView("/livros/listarlivros");
 		List<Livros> livros = LivrosRepository.findAll();
 		mv.addObject("livros", livros);
@@ -66,21 +67,22 @@ public class LivrosController {
 	}
 
 	@RequestMapping(value="/editar/{id}", method=RequestMethod.GET)
-	public ModelAndView editar(@PathVariable("id") int id){
+	public ModelAndView editarLivro(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("livros/editarlivro");
-		Optional<Livros> livro = LivrosRepository.findById(id);
-		mv.addObject("titulo", livro.get().getTitulo());
 
-		mv.addObject("autor", livro.get().getAutor());
+		Optional<Livros> livroOptional = LivrosRepository.findById(id);
 
-		mv.addObject("resumo", livro.get().getResumo());
-
-		mv.addObject("preco", livro.get().getPreco());
-		mv.addObject("genero", livro.get().getGenero());
-		mv.addObject("id", livro.get().getId());
+		if (livroOptional.isPresent()) {
+			Livros livro = livroOptional.get();
+			mv.addObject("livro", livro);
+		} else {
+			mv.setViewName("redirect:/error"); // Redirigir a la página de error
+		}
 
 		return mv;
 	}
+
+
 
 	@RequestMapping(value="/editar/{id}", method=RequestMethod.POST)
 	public String editarLivroBanco(Livros livro, RedirectAttributes msg){
@@ -95,7 +97,7 @@ public class LivrosController {
 	}
 
 	@RequestMapping(value="/deletar/{id}", method=RequestMethod.GET)
-	public String excluir(@PathVariable("id") int id){
+	public String excluirLivro(@PathVariable("id") int id){
 		LivrosRepository.deleteById(id);
 		return "redirect:/listarlivros";
 	}
