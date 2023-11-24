@@ -8,7 +8,7 @@
 <body>
 
 <h1>Editar Alimento</h1>
-<form method="post" th:action="@{/editaralimento/{id}(id=${alimento.id})}" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" th:action="@{'/editaralimento/'+ $(alimento.id}}">
     Nombre<input type="text" name="nombre" th:value="${alimento.nome}"/><br/>
     Precio<input type="text" name="precio" th:value="${alimento.preco}"/><br/>
 

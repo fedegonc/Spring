@@ -8,9 +8,10 @@
 <body>
 
 <h1>Editar Postagem</h1>
-<form method="post" enctype="multipart/form-data" th:action="@{'/postagem/editar/' + ${postagem.id}}"> <!-- Corregí la expresión th:action -->
+<form method="post" enctype="multipart/form-data" th:action="@{'/editarpostagem/' + ${postagem.id}}">
     Título<input type="text" name="titulo" th:value="${postagem.titulo}"/><br/>
     Conteúdo<textarea name="conteudo" th:text="${postagem.conteudo}"></textarea><br/>
+    Imagen actual: <img th:src="@{/imagem/{imagem}(imagem=${postagem.imagem})}" width="100" height="150"/><br/>
     Imagem<input type="file" name="file"/><br/>
     <button type="submit">Salvar Alterações</button>
 </form>

@@ -8,7 +8,7 @@
 
 <h1>Editar Livro</h1>
 
-<form method="post" th:action="@{/editar/{id}(id=${livro.id})}" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" th:action="@{'/editarlivro/' + ${livro.id}}">
 	Título<input type="text" name="titulo" th:value="${livro.titulo}"/><br/>
 	Autor<input type="text" name="autor" th:value="${livro.autor}"/><br/>
 	Género<input type="text" name="genero" th:value="${livro.genero}"/><br/>

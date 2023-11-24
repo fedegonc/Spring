@@ -137,7 +137,7 @@ public class PostagemsController {
     @RequestMapping(value = "/deletarpostagem/{id}", method = RequestMethod.GET)
     public String excluirPostagem(@PathVariable("id") int id) {
         postagemRepository.deleteById(id);
-        return "redirect:/listarpostagem";
+        return "redirect:/listarpostagems";
     }
 }
 

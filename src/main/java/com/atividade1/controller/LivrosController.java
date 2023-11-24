@@ -138,4 +138,20 @@ public class LivrosController {
 		return "redirect:/listarlivros";
 	}
 
+	@RequestMapping(value = "/livros/preco/{preco}", method = RequestMethod.GET)
+	public ModelAndView getLivroPreco(@PathVariable("preco") double preco) {
+		ModelAndView mv = new ModelAndView("/livros/listarlivros");
+		List<Livros> livros = LivrosRepository.findLivrosByPreco(preco);
+		mv.addObject("livros", livros);
+		return mv;
+	}
+
+	@RequestMapping(value = {"/pesquisar","/livros/preco/{preco}"}, method=RequestMethod.POST)
+	public ModelAndView pesquisar(@RequestParam("texto") String pesquisar) {
+		ModelAndView mv = new ModelAndView("/livros/listarlivros");
+		List<Livros> livros = LivrosRepository.findLivrosByTituloLike("%"+pesquisar+"%");
+		mv.addObject("livros", livros);
+		return mv;
+	}
+
 }

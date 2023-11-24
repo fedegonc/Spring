@@ -10,6 +10,16 @@
 
 <body>
 <h1>Livros</h1>
+
+<a href="/livros/preco/123">123</a><br/>
+<a href="/livros/preco/321">321</a><br/>
+
+
+<form method="post" action="pesquisar">
+	Buscar: <input type="text" name="texto"/>
+	<input type="submit"/>
+</form>
+
 <table>
 	<thead>
 	<th>ID</th>
@@ -43,7 +53,7 @@
 </table>
 
 
-<a th:href="@{/listarlivros}">Listar Libros</a><br/>
+<a th:href="@{/novolivro}">Novo Livro</a><br/>
 <a th:href="@{/iniciolivros}">Inicio</a><br/>
 <a th:href="@{/home}">Home</a>
 
