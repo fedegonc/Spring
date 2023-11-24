@@ -15,9 +15,7 @@ import java.util.List;
 public class InicioController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String inicio() {
-        return "home";
+        return "inicio/home";
     }
-
-
 
 }
