@@ -83,10 +83,11 @@ public class AlimentosController {
             Alimentos alimento = alimentoOptional.get();
             mv.addObject("alimento", alimento);
         } else {
-            mv.setViewName("redirect:/error"); // Redirigir a la página de error
+            mv.setViewName("redirect:/error");
         }
         return mv;
     }
+
 
     @RequestMapping(value = "/editaralimento/{id}", method = RequestMethod.POST)
     public String editarAlimentoBanco(@ModelAttribute("alimento") @Valid Alimentos alimentos,

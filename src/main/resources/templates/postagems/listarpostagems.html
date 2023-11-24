@@ -10,28 +10,26 @@
     <thead>
     <th>ID</th>
     <th>Título</th>
-    <th>Autor</th>
-    <th>Conteúdo</th>
+    <th>Conteudo</th>
     <th>Imagem</th>
     <th>Editar</th>
     <th>Excluir</th>
     </thead>
+
     <tbody>
     <tr th:each="postagem : ${postagems}">
         <td th:text="${postagem.id}"></td>
-        <td th:text="${postagem.autor}"></td>
+        <td th:text="${postagem.titulo}"></td>
         <td th:text="${postagem.conteudo}"></td>
-
-        <td><img th:src="@{/img/{imagem}(imagem=${postagem.imagem})}" /></td>
-
-        <td><a th:href="@{/editar/{id}(id=${postagem.id})}">Editar</a></td>
-        <td><a th:href="@{/deletar/{id}(id=${postagem.id})}">Excluir</a></td>
+        <td><img th:src="@{/imagem/{imagem}(imagem=${postagem.imagem})}" /></td>
+        <td><a th:href="@{/editarpostagem/{id}(id=${postagem.id})}">Editar</a></td>
+        <td><a th:href="@{/deletarpostagem/{id}(id=${postagem.id})}">Excluir</a></td>
     </tr>
-    </tbody>
-</table>
 
+    </tbody>
+
+</table>
 <a th:href="@{/novapostagem}">Agregar Nuevo Post</a><br/>
-<a th:href="@{/listarpostagems}">Listar Posts</a><br/>
 <a th:href="@{/iniciopostagems}">Inicio Posts</a><br/>
 <a th:href="@{/home}">Home</a>
 

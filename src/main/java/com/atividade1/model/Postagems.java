@@ -11,51 +11,37 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "postagens")
 public class Postagems {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @NotBlank
     private String titulo;
-
     @NotBlank
     @Lob
     private String conteudo;
-
     private String imagem;
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getTitulo() {
 		return titulo;
 	}
-
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-
 	public String getConteudo() {
 		return conteudo;
 	}
-
 	public void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
 	}
-
 	public String getImagem() {
 		return imagem;
 	}
-
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-
-    
 }

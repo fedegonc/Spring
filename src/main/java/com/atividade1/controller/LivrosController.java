@@ -75,7 +75,7 @@ public class LivrosController {
 
 
 
-	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/editarlivro/{id}", method = RequestMethod.GET)
 	public ModelAndView editarLivro(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("livros/editarlivro");
 		Optional<Livros> livroOptional = LivrosRepository.findById(id);
@@ -88,7 +88,7 @@ public class LivrosController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/editarlivro/{id}", method = RequestMethod.POST)
 	public String editarLivroBanco(@ModelAttribute("livro") @Valid Livros livro,
 								   BindingResult result, RedirectAttributes msg,
 								   @RequestParam("file") MultipartFile imagem) {
@@ -132,7 +132,7 @@ public class LivrosController {
 		}
 		return null;
 	}
-	@RequestMapping(value = "/livros/deletar/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/deletarlivro/{id}", method = RequestMethod.GET)
 	public String excluirLivro(@PathVariable("id") int id) {
 		LivrosRepository.deleteById(id);
 		return "redirect:/listarlivros";
