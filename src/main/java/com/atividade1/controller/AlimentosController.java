@@ -1,5 +1,6 @@
 package com.atividade1.controller;
 
+import com.atividade1.model.Livros;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -71,40 +72,66 @@ public class AlimentosController {
         return mv;
     }
 
+
+
     @RequestMapping(value = "/editaralimento/{id}", method = RequestMethod.GET)
-    public ModelAndView editarAlimento(@PathVariable("id") int id) {
+    public ModelAndView editarAlimentos(@PathVariable("id") int id) {
         ModelAndView mv = new ModelAndView("alimentos/editaralimento");
-        Optional<Alimentos> alimento = alimentosRepository.findById(id);
-        mv.addObject("nome", alimento.get().getNome());
-        mv.addObject("preco", alimento.get().getPreco());
-        mv.addObject("id", alimento.get().getId());
+        Optional<Alimentos> alimentoOptional = alimentosRepository.findById(id);
+
+        if (alimentoOptional.isPresent()) {
+            Alimentos alimento = alimentoOptional.get();
+            mv.addObject("alimento", alimento);
+        } else {
+            mv.setViewName("redirect:/error"); // Redirigir a la página de error
+        }
         return mv;
     }
 
     @RequestMapping(value = "/editaralimento/{id}", method = RequestMethod.POST)
-    public String editarAlimentoBanco(Alimentos alimento, RedirectAttributes msg) {
-        Alimentos alimentoExistente = alimentosRepository.findById(alimento.getId()).orElse(null);
-        alimentoExistente.setNome(alimento.getNome());
-        alimentoExistente.setPreco(alimento.getPreco());
-        alimentosRepository.save(alimentoExistente);
-        return "redirect:/alimentos/listaralimentos";
+    public String editarAlimentoBanco(@ModelAttribute("alimento") @Valid Alimentos alimentos,
+                                   BindingResult result, RedirectAttributes msg,
+                                   @RequestParam("file") MultipartFile imagem) {
+        if (result.hasErrors()) {
+            msg.addFlashAttribute("erro", "Erro ao editar." +
+                    " Por favor, preencha todos os campos");
+            return "redirect:/editar/" + alimentos.getId();
+        }
+        Alimentos alimentoExistente = alimentosRepository.findById(alimentos.getId()).orElse(null);
+        if (alimentoExistente != null) {
+            alimentoExistente.setNome(alimentos.getNome());
+            alimentoExistente.setPreco(alimentos.getPreco());
+            alimentoExistente.setId(alimentos.getId());
+            try {
+                if (!imagem.isEmpty()) {
+                    byte[] bytes = imagem.getBytes();
+                    Path caminho = Paths.get("./src/main/resources/static/img/" + imagem.getOriginalFilename());
+                    Files.write(caminho, bytes);
+                    alimentoExistente.setImagem(imagem.getOriginalFilename());
+                }
+            } catch (IOException e) {
+                System.out.println("Error de imagen");
+            }
+
+            alimentosRepository.save(alimentoExistente);
+            msg.addFlashAttribute("sucesso", "Alimento editado com sucesso.");
+        }
+
+        return "redirect:/listaralimentos";
     }
 
-    @RequestMapping(value = "/alimentos/excluiralimento/{id}", method = RequestMethod.GET)
-    public String excluirAlimento(@PathVariable("id") int id) {
-        alimentosRepository.deleteById(id);
-        return "redirect:/alimentos/listaralimentos";
-    }
-
-    @RequestMapping(value = "/alimento/imagem/{imagem}", method = RequestMethod.GET)
+    @RequestMapping(value = "/imagemalimento/{imagem}", method = RequestMethod.GET)
     @ResponseBody
     public byte[] getImagensAlimento(@PathVariable("imagem") String imagem) throws IOException {
-        File caminho = new File("./src/main/resources/static/img/" + imagem);
-        String imagem2 = imagem;
-		if (imagem != null || imagem2.trim().length() > 0) {
-            return Files.readAllBytes(caminho.toPath());
+        Path caminho = Paths.get("./src/main/resources/static/img/" + imagem);
+        if (imagem != null || imagem.trim().length() > 0) {
+            return Files.readAllBytes(caminho);
         }
         return null;
     }
-
+    @RequestMapping(value = "/deletaralimento/{id}", method = RequestMethod.GET)
+    public String excluirAlimento(@PathVariable("id") int id) {
+        alimentosRepository.deleteById(id);
+        return "redirect:/listaralimentos";
+    }
 }

@@ -4,13 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Listar Livros</title>
-	<link rel="stylesheet" type="text/css" th:href="@{estilos.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/estilos.css}" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap">
 </head>
 
 <body>
-<a href="/livros/preco/132">123</a><br/>
-<a href="/livros/preco/321">321</a><br/>
+
+
 
 
 <h1>Livros</h1>
@@ -30,7 +30,7 @@
 		<td th:text="${livro.titulo}"></td>
 		<td th:text="${livro.autor}"></td>
 		<td th:text="${livro.preco}"></td>
-		<td><img th:src="@{/img/{imagem}(imagem=${livro.imagem})}" /></td>
+		<td><img th:src="@{/imagem/{imagem}(imagem=${livro.imagem})}" /></td>
 		<td th:text="${livro.resumo}"></td>
 		<td th:text="${livro.genero}"></td>
 		<td>

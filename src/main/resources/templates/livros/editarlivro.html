@@ -7,20 +7,21 @@
 <body>
 
 <h1>Editar Livro</h1>
+
 <form method="post" th:action="@{/editar/{id}(id=${livro.id})}" enctype="multipart/form-data">
 	Título<input type="text" name="titulo" th:value="${livro.titulo}"/><br/>
 	Autor<input type="text" name="autor" th:value="${livro.autor}"/><br/>
 	Género<input type="text" name="genero" th:value="${livro.genero}"/><br/>
 	Precio<input type="text" name="preco" th:value="${livro.preco}"/><br/>
 	Resumen<textarea name="resumo" th:text="${livro.resumo}"></textarea><br/>
+
 	Imagen actual: <img th:src="@{/imagem/{imagem}(imagem=${livro.imagem})}" width="100" height="150"/><br/>
+
 	Nueva imagen: <input type="file" name="file"/><br/>
+
 	<button type="submit">Guardar Cambios</button>
 </form>
 
-<form method="post" th:action="@{/deletar/{id}(id=${livro.id})}">
-	<button type="submit">Borrar</button>
-</form>
 
 <a th:href="@{/novolivro}">Agregar Nuevo Libro</a><br/>
 <a th:href="@{/listarlivros}">Listar Libros</a><br/>

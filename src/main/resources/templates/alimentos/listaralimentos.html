@@ -24,14 +24,13 @@
     <tr th:each="alimento : ${alimentos}">
         <td th:text="${alimento.id}"></td>
         <td th:text="${alimento.nome}"></td>
-        <td th:text="${alimento.tipo}"></td>
         <td th:text="${alimento.preco}"></td>
 
-        <td><img th:src="@{/alimento/imagem/{imagem}(imagem=${alimento.imagem})}" /></td>
+        <td><img th:src="@{/imagem/{imagem}(imagem=${alimento.imagem})}" /></td>
 
         <td> <a th:href="@{/editaralimento/{id}(id=${alimento.id})}">Editar</a></td>
 
-        <td><a th:href="@{/alimento/deletar/{id}(id=${alimento.id})}">Excluir</a></td>
+        <td><a th:href="@{/deletaralimento/{id}(id=${alimento.id})}">Excluir</a></td>
     </tr>
     </tbody>
 </table>

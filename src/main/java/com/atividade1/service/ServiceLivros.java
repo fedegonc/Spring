@@ -11,4 +11,6 @@ public interface ServiceLivros {
 	Livros save(Livros livros);
 
 	List<Livros> findLivrosByPreco(double preco);
+
+	List<Livros> findLivrosByTituloLike(String titulo);
 }

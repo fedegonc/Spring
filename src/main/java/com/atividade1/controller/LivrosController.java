@@ -72,39 +72,38 @@ public class LivrosController {
 		return mv;
 	}
 
+
+
+
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
 	public ModelAndView editarLivro(@PathVariable("id") int id) {
 		ModelAndView mv = new ModelAndView("livros/editarlivro");
-
 		Optional<Livros> livroOptional = LivrosRepository.findById(id);
-
 		if (livroOptional.isPresent()) {
 			Livros livro = livroOptional.get();
 			mv.addObject("livro", livro);
 		} else {
 			mv.setViewName("redirect:/error"); // Redirigir a la página de error
 		}
-
 		return mv;
 	}
 
 	@RequestMapping(value = "/editar/{id}", method = RequestMethod.POST)
-	public String editarLivroBanco(@ModelAttribute("livro") @Valid Livros livro, BindingResult result, RedirectAttributes msg,
+	public String editarLivroBanco(@ModelAttribute("livro") @Valid Livros livro,
+								   BindingResult result, RedirectAttributes msg,
 								   @RequestParam("file") MultipartFile imagem) {
 		if (result.hasErrors()) {
-			msg.addFlashAttribute("erro", "Erro ao editar. Por favor, preencha todos os campos");
+			msg.addFlashAttribute("erro", "Erro ao editar. " +
+					"Por favor, preencha todos os campos");
 			return "redirect:/editar/" + livro.getId();
 		}
-
 		Livros livroExistente = LivrosRepository.findById(livro.getId()).orElse(null);
-
 		if (livroExistente != null) {
 			livroExistente.setAutor(livro.getAutor());
 			livroExistente.setTitulo(livro.getTitulo());
 			livroExistente.setResumo(livro.getResumo());
 			livroExistente.setPreco(livro.getPreco());
 			livroExistente.setGenero(livro.getGenero());
-
 			try {
 				if (!imagem.isEmpty()) {
 					byte[] bytes = imagem.getBytes();
@@ -123,11 +122,6 @@ public class LivrosController {
 		return "redirect:/listarlivros";
 	}
 
-	@RequestMapping(value = "/deletar/{id}", method = RequestMethod.GET)
-	public String excluirLivro(@PathVariable("id") int id) {
-		LivrosRepository.deleteById(id);
-		return "redirect:/listarlivros";
-	}
 
 	@RequestMapping(value = "/imagem/{imagem}", method = RequestMethod.GET)
 	@ResponseBody
@@ -137,6 +131,11 @@ public class LivrosController {
 			return Files.readAllBytes(caminho.toPath());
 		}
 		return null;
+	}
+	@RequestMapping(value = "/livros/deletar/{id}", method = RequestMethod.GET)
+	public String excluirLivro(@PathVariable("id") int id) {
+		LivrosRepository.deleteById(id);
+		return "redirect:/listarlivros";
 	}
 
 }

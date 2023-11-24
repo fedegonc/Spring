@@ -38,4 +38,8 @@ public class ServiceImplemLivros implements ServiceLivros{
 		return LivrosRepository.findLivrosByPreco(preco);
 	}
 
+	@Override
+	public List<Livros> findLivrosByTituloLike(String titulo) {
+		return LivrosRepository.findLivrosByTituloLike(titulo);
+	}
 }

@@ -10,4 +10,6 @@ public interface LivrosRepository extends JpaRepository<Livros, Integer>{
     void findAllById(Long id);
 
     List<Livros> findLivrosByPreco(double preco);
+
+    List<Livros> findLivrosByTituloLike(String titulo);
 }

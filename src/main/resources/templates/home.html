@@ -13,7 +13,14 @@
 
 <h1>Bienvenido a la Home</h1>
 
+<a href="/livros/preco/123">123</a><br/>
+<a href="/livros/preco/321">321</a><br/>
 
+
+<form method="post" action="pesquisar">
+    Buscar: <input type="text" name="texto"/>
+    <input type="submit"/>
+</form>
 
 <a th:href="@{/iniciolivros}">Livros</a>
 <a th:href="@{/inicioalimentos}">Alimentos</a>

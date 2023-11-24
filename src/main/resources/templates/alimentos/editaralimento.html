@@ -8,15 +8,18 @@
 <body>
 
 <h1>Editar Alimento</h1>
-<form method="post" enctype="multipart/form-data">
-    Nome<input type="text" name="nome" th:value="${nome}"/><br/>
-    Tipo<input type="text" name="tipo" th:value="${tipo}"/><br/>
-    Preço<input type="text" name="preco" th:value="${preco}"/><br/>
-    Imagem<input type="file" name="file"/><br/>
-    <button type="submit">Salvar Alterações</button>
+<form method="post" th:action="@{/editaralimento/{id}(id=${alimento.id})}" enctype="multipart/form-data">
+    Nombre<input type="text" name="nombre" th:value="${alimento.nome}"/><br/>
+    Precio<input type="text" name="precio" th:value="${alimento.preco}"/><br/>
+
+    Imagen actual: <img th:src="@{/imagem/{imagem}(imagem=${alimento.imagem})}" width="100" height="150"/><br/>
+
+    Nueva imagen: <input type="file" name="file"/><br/>
+
+    <button type="submit">Guardar Cambios</button>
 </form>
 
-<a th:href="@{/novoalimento}">Agregar Nuevo Alimento</a><br/>
+<a th:href="@{/nuevoalimento}">Agregar Nuevo Alimento</a><br/>
 <a th:href="@{/listaralimentos}">Listar Alimentos</a><br/>
 <a th:href="@{/inicioalimentos}">Inicio Alimentos</a>
 
